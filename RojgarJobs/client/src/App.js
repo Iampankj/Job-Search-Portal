@@ -13,7 +13,14 @@ function App() {
   return (
     <div className="App">
       
-      <Home/>
+      <BrowserRouter>
+      <Route path='/' exact component={Home} />
+      <Route path='/Appliedjobs' exact component={AppliedJobs} />
+      <Route path='postjobs' exact component={PostJobs} />
+      <Route path='profile' exact component={Profile} />
+      <Route path='jobinfo' exact component={JobInfo} />
+      
+      </BrowserRouter>
       
 
     </div>
