@@ -52,17 +52,10 @@ class DefaultLayout extends React.Component {
                     <Link to='/appliedjobs'>Applied Jobs</Link>
                 </Menu.Item>
 
-                <Menu.Item key="/postjob" icon={<PlusOutlined />}>
-                    <Link to='/postjob'>Post Job</Link>
+                <Menu.Item key="/postjobs" icon={<PlusOutlined />}>
+                    <Link to='/postjobs'>Post Job</Link>
                 </Menu.Item>
 
-                <Menu.Item key="/posted" icon={<CheckOutlined />}>
-                    <Link to='/posted'>Posted</Link>
-                </Menu.Item>
-
-                <Menu.Item key="/logout" icon={<LogoutOutlined />}>
-                    <Link onClick={this.logout}>Logout</Link>
-                </Menu.Item>
             </Menu>
             </Sider>
             <Layout className="site-layout">

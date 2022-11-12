@@ -2,7 +2,7 @@ import './App.css';
 import 'antd/dist/antd.css';
 import Home from './pages/Home';
 import JobInfo from './pages/JobInfo';
-import {BrowserRouter, Route } from 'react-router-dom'
+import {BrowserRouter, Route, Routes } from 'react-router-dom'
 import AppliedJobs from './pages/AppliedJobs';
 import Profile from './pages/Profile';
 import PostJobs from './pages/PostJobs';
@@ -14,12 +14,13 @@ function App() {
     <div className="App">
       
       <BrowserRouter>
-      <Route path='/' exact component={Home} />
-      <Route path='/Appliedjobs' exact component={AppliedJobs} />
-      <Route path='postjobs' exact component={PostJobs} />
-      <Route path='profile' exact component={Profile} />
-      <Route path='jobinfo' exact component={JobInfo} />
-      
+        <Routes>
+          <Route path='/' exact element={<Home />} />
+          <Route path='/Appliedjobs' exact element={<AppliedJobs/>} />
+          <Route path='/postjobs' exact element={<PostJobs/>} />
+          <Route path='/profile' exact element={<Profile/>} />
+          <Route path='/jobinfo' exact element={<JobInfo/>} />
+        </Routes>
       </BrowserRouter>
       
 
