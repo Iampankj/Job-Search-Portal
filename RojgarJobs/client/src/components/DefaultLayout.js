@@ -40,7 +40,7 @@ class DefaultLayout extends React.Component {
             style={{position: 'sticky', overflow: 'auto', height: '100%', top: 0}}
             >
             <div className="logo">
-                {this.state.collapsed ? (<h1>RJ</h1>): (<h1>RojgarJobs</h1>)}
+                {this.state.collapsed ? (<h1>RJ</h1>): (<h1>RojgarJobs </h1>)}
             </div>
             
             <Menu theme="dark" mode="inline" defaultSelectedKeys={[window.location.pathname]}>

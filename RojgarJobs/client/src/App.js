@@ -2,10 +2,12 @@ import "./App.css";
 import "antd/dist/antd.css";
 import Home from "./pages/Home";
 import JobInfo from "./pages/JobInfo";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import AppliedJobs from "./pages/AppliedJobs";
 import Profile from "./pages/Profile";
 import PostJobs from "./pages/PostJobs";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, CSSProperties, useEffect } from "react";
 import FadeLoader from "react-spinners/FadeLoader";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +37,8 @@ function App() {
           <Route path="/postjobs" exact element={<PostJobs />} />
           <Route path="/profile" exact element={<Profile />} />
           <Route path="/jobs/:id" exact element={<JobInfo />} />
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/register" exact element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&display=swap');
 
 body {
   margin: 0;
@@ -7,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'IBM Plex Serif', serif !important;
 }
 
 code {
@@ -24,7 +24,7 @@ code {
 }
 
 #components-layout-demo-custom-trigger .trigger:hover {
-  color: #1890ff;
+  color: #020b13;
 }
 
 #components-layout-demo-custom-trigger .logo {
@@ -87,6 +87,13 @@ p{
   border-radius: 15px !important;
 }
 button{
-  background-color: #001529 !important;
+  background-color: #1964aa !important;
   color: white !important;
+}
+.h1, h1 {
+  font-size: 2.0rem !important;
+}
+
+.login{
+  padding-top: 150px;
 }

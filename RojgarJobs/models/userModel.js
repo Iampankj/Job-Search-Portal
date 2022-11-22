@@ -5,20 +5,20 @@ const userSchema = new mongoose.Schema({
     username : {type: String, require: true},
     password : {type: String, require: true},
 
-    firstName : {type: String},
-    lastName : {type: String},
-    email : {type: String},
-    mobileNumber : {type: String},
-    portfolio : {type: String},
+    firstName : {type: String, default: " "},
+    lastName : {type: String, default: " "},
+    email : {type: String, default: " "},
+    mobileNumber : {type: String, default: " "},
+    portfolio : {type: String, default: " "},
 
-    about : {type: String},
-    address : {type: String},
+    about : {type: String, default: " "},
+    address : {type: String, default: " "},
     
 
-    education: {type: []},
-    skills: {type: []},
-    projects: {type: []},
-    experience: {type: []},
+    education: {type: [], default: [' ']},
+    skills: {type: [], default: [' ']},
+    projects: {type: [], default: [' ']},
+    experience: {type: [], default: [' ']},
 
     appliedJobs: []
 
