@@ -7,6 +7,7 @@ import { registerUser } from '../redux/actions/userActions';
 function Register() {
     const dispatch= useDispatch()
     function register(values){
+        console.log("login registered");
         if(values.password!== values.confirmpassword){
             message.error('passwords do not matched');
         }else{

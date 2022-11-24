@@ -64,6 +64,7 @@ code {
   
   position: fixed !important;
   top: 40% !important;
+  left: 50% !important;
   height: 100% !important;
   width: 100% !important;
   z-index: 9999; 
@@ -84,11 +85,13 @@ p{
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .job-div{
-  border-radius: 15px !important;
+  border-radius: 10px !important;
+  padding: 25px !important;
 }
 button{
-  background-color: #1964aa !important;
+  background-color: #084989 !important;
   color: white !important;
+  border-radius: 4px !important;
 }
 .h1, h1 {
   font-size: 2.0rem !important;
@@ -96,4 +99,9 @@ button{
 
 .login{
   padding-top: 150px;
+}
+
+input, .ant-input{
+  border: 1px solid #1964aa !important;
+  box-shadow: none !important;
 }

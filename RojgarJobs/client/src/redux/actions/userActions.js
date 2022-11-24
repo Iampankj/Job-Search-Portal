@@ -26,7 +26,7 @@ export const loginUser = (values) => async dispatch => {
     try {
         const user = await axios.post('/api/users/login', values)
         message.success('Login Success')
-        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('user', JSON.stringify(user.data))
         setTimeout(()=>{
         window.location.href='/'
         },1000)

@@ -19,23 +19,23 @@ function Home() {
             <DefaultLayout>
                 <Row gutter={16}>
                     {jobs.map((job) => {
-                    return    <Col lg={12} sm={24}>
+                        return <Col lg={12} sm={24} key={job._id}>
                             <div className="job-div bs m-2 p-2">
                                 <h4><b>{job.title}</b></h4>
                                 <p>{job.company}</p>
-                                <hr/>
+                                <hr />
                                 <p>{job.smallDescription}</p>
                                 <div className="flex">
                                     <p>Salary: <b>{job.salaryFrom} - {job.salaryTo}  </b></p>
-                                    <p style={{marginLeft: 20}}>Experience: <b>{job.experience} Years</b></p>
+                                    <p style={{ marginLeft: 20 }}>Experience: <b>{job.experience} Years</b></p>
                                 </div>
                                 <hr />
                                 <div className="flex justify-content-between">
-                                <Link to={`/jobs/${job._id}`}> <Button>View</Button> </Link>
-                                <p>Posted on: {moment(job.createdAt).format('MMM DD yyyy')}</p>
-                                    
+                                    <Link to={`/jobs/${job._id}`}> <Button>View</Button> </Link>
+                                    <p>Posted on: {moment(job.createdAt).format('MMM DD yyyy')}</p>
+
                                 </div>
-                                
+
                             </div>
                         </Col>;
                     })}
