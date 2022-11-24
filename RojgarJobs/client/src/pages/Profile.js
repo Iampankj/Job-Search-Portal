@@ -8,13 +8,18 @@ import { Field } from 'rc-field-form'
 
 
 function Profile() {
-    const[personalInfo, setPersonalInfo] = useState()
-    const[activeTab, setActiveTab] = useState()
+    const [personalInfo, setPersonalInfo] = useState()
+    const [activeTab, setActiveTab] = useState("1")
 
-    function onPersonalInfoSubmit(values){
+    function onPersonalInfoSubmit(values) {
         setPersonalInfo(values)
         console.log(values)
         setActiveTab("2")
+    }
+
+    function onFinalFinish(values){
+        const finalObj = {...personalInfo, ...values}
+        console.log(finalObj)
     }
 
     const user = JSON.parse(localStorage.getItem('user'))
@@ -28,38 +33,38 @@ function Profile() {
                         <Form layout='vertical' onFinish={onPersonalInfoSubmit} initialValues={user}>
                             <Row gutter={16}>
                                 <Col lg={8} sm={24}>
-                                    <Form.Item label='First name' required rules={[{required: true}]} name='firstName'>
+                                    <Form.Item label='First name' required rules={[{ required: true }]} name='firstName'>
                                         <Input />
                                     </Form.Item>
                                 </Col>
                                 <Col lg={8} sm={24}>
-                                    <Form.Item label='Last name' required rules={[{required: true}]} name='lastName'>
+                                    <Form.Item label='Last name' required rules={[{ required: true }]} name='lastName'>
                                         <Input />
                                     </Form.Item>
                                 </Col>
                                 <Col lg={8} sm={24}>
-                                    <Form.Item label='Email' required rules={[{required: true}]} name='email'>
+                                    <Form.Item label='Email' required rules={[{ required: true }]} name='email'>
                                         <Input />
                                     </Form.Item>
                                 </Col>
                                 <Col lg={8} sm={24}>
-                                    <Form.Item label='Mobile Number' required rules={[{required: true}]} name='mobileNumber'>
+                                    <Form.Item label='Mobile Number' required rules={[{ required: true }]} name='mobileNumber'>
                                         <Input />
                                     </Form.Item>
                                 </Col>
                                 <Col lg={8} sm={24}>
-                                    <Form.Item label='Portfolio' required rules={[{required: true}]} name='portfolio'>
+                                    <Form.Item label='Portfolio' required rules={[{ required: true }]} name='portfolio'>
                                         <Input />
                                     </Form.Item>
                                 </Col>
                                 <Col lg={24} sm={24}>
-                                    <Form.Item label='About' required rules={[{required: true}]} name='about'>
-                                        <TextArea rows={4}/>
+                                    <Form.Item label='About' required rules={[{ required: true }]} name='about'>
+                                        <TextArea rows={4} />
                                     </Form.Item>
                                 </Col>
                                 <Col lg={24} sm={24}>
-                                    <Form.Item label='Address' required rules={[{required: true}]} name='address'>
-                                        <TextArea rows={4}/>
+                                    <Form.Item label='Address' required rules={[{ required: true }]} name='address'>
+                                        <TextArea rows={4} />
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -70,31 +75,88 @@ function Profile() {
 
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Skills and Education" key="2">
-                        <Form initialValues={{education:['']}} layout="vertical">
+                        <Form initialValues={user} layout="vertical" onFinish={onFinalFinish}>
                             <Row>
-                            <Col lg={24} sm={24}>
-                                <Form.List name='education'>
-                                    {(education, {add, remove})=>(
-                                        <div>
-                                            {education.map(field => (
-                                                
-                                                <div className='flex'>
-                                                    <Form.Item required {...field} label="Education" style={{width:'80%'}} rules={[{required:true}]}>
-                                                        <TextArea rows={4}/>
-                                                    </Form.Item>
-                                                    <Button>Add more</Button>
-                                                    <Button>Delete</Button>
-                                                </div>
-                                                
-                                            ))}
-                                        </div>
-                                    )}
-                                </Form.List>
+                                
+                                <Col lg={24} sm={24}>
+                                    <Form.List name='education'>
+                                        {(education, { add, remove }) => (
+                                            <div>
+                                                {education.map((field, index) => (
+                                                    <div className='flex'>
+                                                        <Form.Item required {...field} label="Education" style={{ width: '80%' }} rules={[{ required: true }]}>
+                                                            <TextArea rows={4} />
+                                                        </Form.Item>
+                                                        <Button onClick={() => { add() }}>Add more</Button>
+                                                        {index !== 0 && (<Button onClick={() => { remove(index) }}>Delete</Button>)}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </Form.List>
                                 </Col>
+
+                                <Col lg={24} sm={24}>
+                                    <Form.List name='skills'>
+                                        {(skills, { add, remove }) => (
+                                            <div>
+                                                {skills.map((field, index) => (
+                                                    <div className='flex'>
+                                                        <Form.Item required {...field} label="Skills" style={{ width: '80%' }} rules={[{ required: true }]}>
+                                                            <TextArea rows={4} />
+                                                        </Form.Item>
+                                                        <Button onClick={() => { add() }}>Add more</Button>
+                                                        {index !== 0 && (<Button onClick={() => { remove(index) }}>Delete</Button>)}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </Form.List>
+                                </Col>
+
+                                <Col lg={24} sm={24}>
+                                    <Form.List name='projects'>
+                                        {(projects, { add, remove }) => (
+                                            <div>
+                                                {projects.map((field, index) => (
+                                                    <div className='flex'>
+                                                        <Form.Item required {...field} label="Project" style={{ width: '80%' }} rules={[{ required: true }]}>
+                                                            <TextArea rows={4} />
+                                                        </Form.Item>
+                                                        <Button onClick={() => { add() }}>Add more</Button>
+                                                        {index !== 0 && (<Button onClick={() => { remove(index) }}>Delete</Button>)}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </Form.List>
+                                </Col>
+
+                                <Col lg={24} sm={24}>
+                                    <Form.List name='experience'>
+                                        {(experience, { add, remove }) => (
+                                            <div>
+                                                {experience.map((field, index) => (
+                                                    <div className='flex'>
+                                                        <Form.Item required {...field} label="Experience" style={{ width: '80%' }} rules={[{ required: true }]}>
+                                                            <TextArea rows={4} />
+                                                        </Form.Item>
+                                                        <Button onClick={() => { add() }}>Add more</Button>
+                                                        {index !== 0 && (<Button onClick={() => { remove(index) }}>Delete</Button>)}
+                                                    </div>
+
+                                                ))}
+                                            </div>
+                                        )}
+                                    </Form.List>
+                                </Col>
+
                             </Row>
+                            <Button onClick={()=>{setActiveTab("1")}}>Previous</Button>
+                            <Button htmlType='submit'>Update</Button>
                         </Form>
                     </Tabs.TabPane>
-                    
+
                 </Tabs>
             </DefaultLayout>
         </div>
