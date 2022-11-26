@@ -9,7 +9,7 @@ function Login() {
     const dispatch = useDispatch()
 
     function login(values) {
-        console.log("login called");
+        
         dispatch(loginUser(values))
 
     }

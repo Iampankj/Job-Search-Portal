@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import DefaultLayout from "../components/DefaultLayout"
 import { Row, Col, Form, Tabs, Input, Button } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
-import { Field } from 'rc-field-form'
+import { useDispatch } from 'react-redux'
+import { updateUser } from '../redux/actions/userActions'
 
 
 
@@ -11,15 +12,18 @@ function Profile() {
     const [personalInfo, setPersonalInfo] = useState()
     const [activeTab, setActiveTab] = useState("1")
 
+    const dispatch = useDispatch()
+
     function onPersonalInfoSubmit(values) {
         setPersonalInfo(values)
         console.log(values)
         setActiveTab("2")
     }
 
-    function onFinalFinish(values){
-        const finalObj = {...personalInfo, ...values}
+    function onFinalFinish(values) {
+        const finalObj = { ...personalInfo, ...values }
         console.log(finalObj)
+        dispatch(updateUser(finalObj))
     }
 
     const user = JSON.parse(localStorage.getItem('user'))
@@ -77,7 +81,7 @@ function Profile() {
                     <Tabs.TabPane tab="Skills and Education" key="2">
                         <Form initialValues={user} layout="vertical" onFinish={onFinalFinish}>
                             <Row>
-                                
+
                                 <Col lg={24} sm={24}>
                                     <Form.List name='education'>
                                         {(education, { add, remove }) => (
@@ -152,7 +156,7 @@ function Profile() {
                                 </Col>
 
                             </Row>
-                            <Button onClick={()=>{setActiveTab("1")}}>Previous</Button>
+                            <Button onClick={() => { setActiveTab("1") }}>Previous</Button>
                             <Button htmlType='submit'>Update</Button>
                         </Form>
                     </Tabs.TabPane>
