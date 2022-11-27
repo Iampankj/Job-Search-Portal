@@ -19,7 +19,8 @@ export const postJob = (values) => async dispatch => {
 
     dispatch({type:'LOADING', payload:true})
     try {
-        let response = await axios.get('/api/jobs/postjob', values)
+
+        const response = await axios.post('/api/jobs/postjob', values);
         
         dispatch({type:'LOADING', payload:false})
         message.success('Job Posted Successfully')
