@@ -11,7 +11,6 @@ import { updateUser } from '../redux/actions/userActions'
 function Profile() {
     const [personalInfo, setPersonalInfo] = useState()
     const [activeTab, setActiveTab] = useState("1")
-
     const dispatch = useDispatch()
 
     function onPersonalInfoSubmit(values) {
