@@ -2,7 +2,7 @@ import { Button } from 'antd'
 import moment from 'moment'
 import React, { useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import DefaultLayout from '../components/DefaultLayout'
 
 
@@ -11,6 +11,8 @@ function JobInfo({match}) {
     const {jobs} = useSelector(state => state.jobsReducer)
     const {id} = useParams()
     const job = jobs.find(job => job._id == id)
+
+    const userid = JSON.parse(localStorage.getItem('user'))._id;
 
     return (
         <div>
@@ -34,7 +36,7 @@ function JobInfo({match}) {
 
                     <hr />
                     <div className='flex justify-content-between'>
-                        <Button>Apply Now</Button>
+                        {job.postedBy == userid ? (<Button><Link to={`/editjob/${job._id}`}>Edit Now</Link></Button>): <Button>Apply Now</Button>}
                         <p><b>Posted on</b> {moment(job.createdAt).format('MMM DD yyyy')}</p>
                     </div>
 

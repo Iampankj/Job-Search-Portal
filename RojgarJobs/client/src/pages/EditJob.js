@@ -2,18 +2,23 @@ import React, { useState } from 'react'
 import DefaultLayout from "../components/DefaultLayout"
 import { Row, Col, Form, Tabs, Input, Button, Select } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { updateUser } from '../redux/actions/userActions'
-import { postJob } from '../redux/actions/jobActions'
+import { editJob, postJob } from '../redux/actions/jobActions'
+import { useParams, Link } from 'react-router-dom'
 const{Option} = Select;
 
 
-function PostJobs() {
+function EditJob({match}) {
 
     const [jobInfo, setJobInfo] = useState({})
     const [activeTab, setActiveTab]= useState("0")
+    
     const dispatch = useDispatch()
+
+    const {jobs} = useSelector(state => state.jobsReducer)
+    const { id } = useParams()
 
     function onFirstFormFinish(values){
         setJobInfo(values)
@@ -23,18 +28,23 @@ function PostJobs() {
 
     function onFinalFormFinish(values){
         const finalObj = {...jobInfo, ...values};
+        
+        finalObj._id = id
+
         console.log(finalObj)
-        dispatch(postJob(finalObj))
+        dispatch(editJob(finalObj))
         
     }
 
+    const job = jobs.find(job => job._id == id )
+    console.log(job);
 
     return (
         <div>
             <DefaultLayout>
                 <Tabs defaultActiveKey='0' activeKey={activeTab}>
                     <Tabs.TabPane tab="Job Info" key='0'>
-                        <Form layout='vertical' onFinish={onFirstFormFinish}>
+                        <Form layout='vertical' onFinish={onFirstFormFinish} initialValues = {job}>
                             <Row gutter={16}>
                                 <Col lg={8} sm = {24}>
                                     <Form.Item name="title" rules={[{required: true}]} label="Title">
@@ -90,7 +100,7 @@ function PostJobs() {
                         </Form>
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Company Info" key='1'>
-                        <Form layout='vertical' onFinish={onFinalFormFinish}>
+                        <Form layout='vertical' onFinish={onFinalFormFinish} initialValues = {job}>
                             <Row gutter={16}>
                             <Col lg={8} sm = {24}>
                                     <Form.Item name="company" rules={[{required: true}]} label="Company Name">
@@ -107,17 +117,16 @@ function PostJobs() {
                                         <Input />
                                     </Form.Item>
                                 </Col>
-                                <Col lg={24} sm = {24}>
+                            </Row>
+                            <Row>
+                            <Col lg={24} sm = {24}>
                                     <Form.Item name="companyDescription" rules={[{required: true}]} label="Company Description">
-                                        <Input rows = {4} />
+                                        <Input rows = {4}/>
                                     </Form.Item>
                                 </Col>
                             </Row>
-                            {/* <Row>
-                            
-                            </Row> */}
                             <Button onClick={()=>{setActiveTab('0')}}>Previous</Button>
-                            <Button htmlType='submit'>Post Job</Button>
+                            <Button htmlType='submit'>Edit Job</Button>
                         </Form>
                     </Tabs.TabPane>
 
@@ -127,4 +136,4 @@ function PostJobs() {
     )
 }
 
-export default PostJobs
+export default EditJob;

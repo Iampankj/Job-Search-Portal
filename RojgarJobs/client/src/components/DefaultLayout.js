@@ -2,12 +2,9 @@ import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     PlusSquareOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
     HomeOutlined,
     UserOutlined,
     PlusOutlined,
-    CheckOutlined,
     LogoutOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
@@ -32,6 +29,11 @@ class DefaultLayout extends React.Component {
             collapsed: !this.state.collapsed,
         });
     };
+
+    logout=()=>{
+        localStorage.removeItem('user');
+        window.location.reload();
+    }
     
     render(){
     return (
@@ -60,8 +62,12 @@ class DefaultLayout extends React.Component {
                     <Link to='/postjobs'>Post Job</Link>
                 </Menu.Item>
 
+                <Menu.Item key="/posted" icon={<PlusOutlined />}>
+                    <Link to='/posted'>Posted</Link>
+                </Menu.Item>
+
                 <Menu.Item key="/logout" icon={<LogoutOutlined />}>
-                    <Link to='/login'>Logout</Link>
+                    <Link to='/login' onClick={this.logout}>Logout</Link>
                 </Menu.Item>
 
             </Menu>
