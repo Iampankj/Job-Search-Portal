@@ -11,17 +11,20 @@ import { BrowserRouter, Route, Routes, redirect } from "react-router-dom";
 import { useState, CSSProperties, useEffect } from "react";
 import FadeLoader from "react-spinners/FadeLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllJogs } from "./redux/actions/jobActions";
+import { getAllJobs } from "./redux/actions/jobActions";
 import PostedJobs from "./pages/PostedJobs";
 import EditJob from "./pages/EditJob";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import { getAllUsers } from "./redux/actions/userActions";
+import UserInfo from "./pages/UserInfo";
 
 function App() {
   const { loader } = useSelector((state) => state.loaderReducer);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllJogs());
+    dispatch(getAllJobs());
+    dispatch(getAllUsers())
   }, []);
 
   return (
@@ -45,6 +48,7 @@ function App() {
             <Route path="/jobs/:id" exact element={<JobInfo />} />
             <Route path="/posted" exact element={<PostedJobs />} />
             <Route path="/editjob/:id" exact element={<EditJob />} />
+            <Route path="/users/:id" exact element={<UserInfo />} />
           </Route>
         </Routes>
       </BrowserRouter>

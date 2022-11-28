@@ -1,7 +1,7 @@
 import axios from "axios";
 import { message } from "antd";
 
-export const getAllJogs = () => async (dispatch) => {
+export const getAllJobs = () => async (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
     try {
         const response = await axios.get("/api/jobs/getalljobs");
@@ -46,3 +46,62 @@ export const editJob = (values) => async (dispatch) => {
         dispatch({ type: "LOADING", payload: false });
     }
 };
+
+export const applyJob = (job) => async (dispatch) => {
+
+    const user = JSON.parse(localStorage.getItem('user'))
+    dispatch({ type: "LOADING", payload: true });
+    try {
+        
+        const response = await axios.post("/api/jobs/applyjob", {job, user});
+        dispatch({ type: "LOADING", payload: false });
+        message.success("Job Applied Successfully");
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 1000);
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: "LOADING", payload: false });
+    }
+};
+
+
+export const searchJobs = (seachKey) => async (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
+    try {
+        const response = await axios.get("/api/jobs/getalljobs");
+
+        const jobs = response.data
+        const filteredJobs = jobs.filter(job => job.title.toLowerCase().includes(seachKey.toLowerCase()))
+
+        dispatch({ type: "GET_ALL_JOBS", payload: filteredJobs });
+        dispatch({ type: "LOADING", payload: false });
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: "LOADING", payload: false });
+    }
+};
+
+
+export const sortJobs = (values) => async (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
+    try {
+        const response = await axios.get("/api/jobs/getalljobs");
+        const jobs = response.data
+        var filteredJobs = jobs
+        if(values.experience !== undefined){
+            filteredJobs = jobs.filter(job => job.experience <= values.experience)
+        }
+        if(values.salary !== undefined){
+            filteredJobs = jobs.filter(job => job.salaryTo >= values.salaryTo)
+        }
+        
+        dispatch({ type: "GET_ALL_JOBS", payload: filteredJobs });
+        dispatch({ type: "LOADING", payload: false });
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: "LOADING", payload: false });
+    }
+};
+
+

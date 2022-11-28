@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllJogs } from "../redux/actions/jobActions";
+import { getAllJobs } from "../redux/actions/jobActions";
 import { Row, Col, Button } from "antd";
 import { Link } from "react-router-dom";
 import moment from 'moment';
@@ -11,7 +11,7 @@ function Home() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllJogs());
+        dispatch(getAllJobs());
     }, []);
 
     return (

@@ -2,6 +2,11 @@ import React from 'react';
 import { Row, Col, Form, Input, Button, message } from "antd"
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../redux/actions/userActions';
+import { Link } from 'react-router-dom';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+AOS.init();
 
 
 function Register() {
@@ -18,10 +23,11 @@ function Register() {
 
 
     return (
-        <div className='login'>
+        <div className='register'>
             
-            <Row justify='center'>
-                <Col lg={10} sm={24} className='bs p-5'> 
+            <Row justify='center' className='flex align-items-center'>
+            <Col lg={5}><h1 className='heading1' data-aos="slide-left">Rojgar</h1></Col>
+                <Col lg={10} sm={24} className='bs p-5 register-form'> 
                 <h3>Register</h3>
                 <hr />
                     <Form layout='vertical' onFinish={register}>
@@ -34,11 +40,14 @@ function Register() {
                     <Form.Item label="confirm password" name="confirmpassword" rules={[{required:true}]}>
                         <Input />
                     </Form.Item>
-                    <Button htmlType='submit'>Register</Button>
+                    <Button htmlType='submit' >Register</Button>
+                    <br/>
+                    <p className='mt-3'>Already registered? <Link to='/login'>Click here</Link> to login.</p>
                     </Form>
 
                     
                 </Col>
+                <Col lg={5}><h1 className='heading2' data-aos="slide-right">Jobs</h1></Col>
 
             </Row>
         </div>

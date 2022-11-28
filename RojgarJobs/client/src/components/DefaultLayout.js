@@ -6,17 +6,18 @@ import {
     UserOutlined,
     PlusOutlined,
     LogoutOutlined,
+    CheckOutlined
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React from 'react';
 import { Link} from 'react-router-dom';
+import Filter from '../pages/Filter';
 
 
 
 const { Header, Sider, Content } = Layout;
 
-// const App = () => {
-//     const [collapsed, setCollapsed] = useState(false);
+
 class DefaultLayout extends React.Component {
     constructor(props){
         super();
@@ -36,6 +37,8 @@ class DefaultLayout extends React.Component {
     }
     
     render(){
+
+        const user = JSON.parse(localStorage.getItem('user'))
     return (
         <Layout>
             <Sider trigger={null} collapsible collapsed={this.state.collapsed}
@@ -62,7 +65,7 @@ class DefaultLayout extends React.Component {
                     <Link to='/postjobs'>Post Job</Link>
                 </Menu.Item>
 
-                <Menu.Item key="/posted" icon={<PlusOutlined />}>
+                <Menu.Item key="/posted" icon={<CheckOutlined />}>
                     <Link to='/posted'>Posted</Link>
                 </Menu.Item>
 
@@ -79,10 +82,21 @@ class DefaultLayout extends React.Component {
                         padding: 0, position: 'sticky', overflow: 'auto', top: 0, zIndex:9999
                     }}
                 >
-                {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                    className: 'trigger',
-                    onClick: this.toggle,
-                })}
+                    <div className='flex justify-content-between'>
+                        <div>
+                            {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                            className: 'trigger',
+                            onClick: this.toggle,
+                            })}
+                        </div>
+                        <div>
+                            <Filter/>
+                        </div>
+                        <div style={{display : this.state.collapsed ? 'none' : 'inline'}}>
+                            <h6 className='mr-2'><b>{user.username}</b></h6>
+                        </div>
+                    </div>
+                
                 </Header>
                 <Content
                     className="site-layout-background"
