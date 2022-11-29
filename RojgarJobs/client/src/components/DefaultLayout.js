@@ -1,22 +1,11 @@
 import {
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    PlusSquareOutlined,
-    HomeOutlined,
-    UserOutlined,
-    PlusOutlined,
-    LogoutOutlined,
-    CheckOutlined
+    MenuUnfoldOutlined, MenuFoldOutlined, PlusSquareOutlined, HomeOutlined, UserOutlined, PlusOutlined, LogoutOutlined, CheckOutlined
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React from 'react';
 import { Link} from 'react-router-dom';
 import Filter from '../pages/Filter';
-
-
-
 const { Header, Sider, Content } = Layout;
-
 
 class DefaultLayout extends React.Component {
     constructor(props){
@@ -30,14 +19,11 @@ class DefaultLayout extends React.Component {
             collapsed: !this.state.collapsed,
         });
     };
-
     logout=()=>{
         localStorage.removeItem('user');
         window.location.reload();
     }
-    
     render(){
-
         const user = JSON.parse(localStorage.getItem('user'))
     return (
         <Layout>
@@ -52,27 +38,21 @@ class DefaultLayout extends React.Component {
                 <Menu.Item key="/" icon={<HomeOutlined />}>
                     <Link to='/'>Home</Link>
                 </Menu.Item>
-
                 <Menu.Item key="/profile" icon={<UserOutlined />}>
                     <Link to='/profile'>Profile</Link>
                 </Menu.Item>
-
                 <Menu.Item key="/appliedjobs" icon={<PlusSquareOutlined />}>
-                    <Link to='/appliedjobs'>Applied Jobs</Link>
+                    <Link to='/appliedjobs'>Applied jobs</Link>
                 </Menu.Item>
-
                 <Menu.Item key="/postjobs" icon={<PlusOutlined />}>
-                    <Link to='/postjobs'>Post Job</Link>
+                    <Link to='/postjobs'>Post a job</Link>
                 </Menu.Item>
-
                 <Menu.Item key="/posted" icon={<CheckOutlined />}>
                     <Link to='/posted'>Posted</Link>
                 </Menu.Item>
-
                 <Menu.Item key="/logout" icon={<LogoutOutlined />}>
                     <Link to='/login' onClick={this.logout}>Logout</Link>
                 </Menu.Item>
-
             </Menu>
             </Sider>
             <Layout className="site-layout">
@@ -93,10 +73,9 @@ class DefaultLayout extends React.Component {
                             <Filter/>
                         </div>
                         <div style={{display : this.state.collapsed ? 'none' : 'inline'}}>
-                            <h6 className='mr-2'><b>{user.username}</b></h6>
+                            <h6 className='mr-2' ><b>{user.username}</b></h6>
                         </div>
                     </div>
-                
                 </Header>
                 <Content
                     className="site-layout-background"
