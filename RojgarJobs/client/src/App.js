@@ -24,7 +24,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllJobs());
-    dispatch(getAllUsers())
+    dispatch(getAllUsers());
   }, []);
 
   return (

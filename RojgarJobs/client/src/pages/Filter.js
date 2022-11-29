@@ -4,7 +4,7 @@ import { Modal, Form, Select, Button } from 'antd';
 import React, { useState } from 'react'
 import {
     FilterOutlined
-    
+
 } from '@ant-design/icons';
 import { Option } from 'antd/lib/mentions';
 import { useDispatch } from 'react-redux';
@@ -16,6 +16,7 @@ function Filter() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dispatch = useDispatch()
     const showModal = () => {
+        console.log('show action')
         setIsModalOpen(true);
     };
     const handleOk = () => {
@@ -31,10 +32,10 @@ function Filter() {
     }
     return (
         <div className='flex'>
-            
+
             <Search onSearch={(value)=>{dispatch(searchJobs(value))}}/> 
             <FilterOutlined onClick={showModal}/>
-            <Modal title="Basic Modal" footer={false} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} closable={false}>
+            <Modal title="Basic Modal" footer={false} visible={isModalOpen} onOk={handleOk} onCancel={handleCancel} closable={false}>
                 <Form layout='vertical' onFinish={sort}>
                     <Form.Item name='experience' label= "Experience">
                         <Select>
@@ -60,32 +61,3 @@ function Filter() {
 }
 
 export default Filter
-
-// import React, { useState } from 'react';
-
-// import { Button, Modal } from 'antd';
-// function Filter() {
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const showModal = () => {
-//     setIsModalOpen(true);
-//   };
-//   const handleOk = () => {
-//     setIsModalOpen(false);
-//   };
-//   const handleCancel = () => {
-//     setIsModalOpen(false);
-//   };
-//   return (
-//     <>
-//       <Button type="primary" onClick={showModal}>
-//         Open Modal
-//       </Button>
-//       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-//         <p>Some contents...</p>
-//         <p>Some contents...</p>
-//         <p>Some contents...</p>
-//       </Modal>
-//     </>
-//   );
-// };
-// export default Filter;

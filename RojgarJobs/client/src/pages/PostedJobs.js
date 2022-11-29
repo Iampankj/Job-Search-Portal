@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
 import { Table } from "antd";
-import Modal from 'antd/lib/modal/Modal'
+//import Modal from 'antd/lib/modal/Modal'
+import { Button, Modal } from 'antd';
 import moment from "moment";
 import { EditOutlined, OrderedListOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
@@ -46,10 +47,10 @@ function PostedJobs() {
                         />
                         <OrderedListOutlined
                             style={{ fontSize: 20 }}
-                            onClick={() => {
-
-                                showModal(job);
-                            }}
+                            onClick={() => 
+                                
+                                showModal(job)
+                            }
                         />
                     </div>
                 );
@@ -102,10 +103,12 @@ function CandidatesList(){
 
     var candidatesDatasource = []
     for(var candidate of selectedJob.appliedCandidates){
+
         var user = allusers.find(user => user._id == candidate.userid)
         var obj ={
+
             candidateId: user._id,
-            fullName: user.firstName + " " + user.LastName,
+            fullName: user.firstName + " " + user.lastName,
             appliedDate: candidate.appliedDate
         }
         candidatesDatasource.push(obj);
@@ -114,10 +117,6 @@ function CandidatesList(){
     return <Table columns={candidatesColumns} dataSource={candidatesDatasource}/>
 }
 
-
-
-
-    console.log(userPostedJobs);
     return (
         <div>
             <DefaultLayout>
@@ -128,7 +127,7 @@ function CandidatesList(){
                 <Modal
                     title="Applied candidates list"
                     closable={false}
-                    open={isModalOpen}
+                    visible={isModalOpen}
                     onOk={handleOk}
                     onCancel={handleCancel}
                     width={800}
