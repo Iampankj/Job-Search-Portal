@@ -1,10 +1,7 @@
 const initialState = {
-    
     jobs : []
-
 }
 export const jobsReducer = ( state = initialState, action) => {
-
     switch(action.type)
     {
         case 'GET_ALL_JOBS': return{
@@ -13,5 +10,4 @@ export const jobsReducer = ( state = initialState, action) => {
         }
         default : return state
     }
-
 }
