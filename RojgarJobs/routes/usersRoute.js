@@ -14,12 +14,15 @@ router.post("/register", async(req, res) => {
 
 router.post("/login", async(req, res) => {
     try {
-        const user = await User.findOne({username : req.body.username, password : req.body.password})
+        const user = await User.findOne({
+            username : req.body.username, 
+            password : req.body.password})
         if(user){
             res.send(user)
         }
         else{
-            return res.status(400).json({message:'invalid credentials'});
+            return res.status(400).json({
+                message:'invalid credentials'});
         }
         
     } catch (error) {

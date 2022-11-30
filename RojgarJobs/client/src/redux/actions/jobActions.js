@@ -15,11 +15,9 @@ export const getAllJobs = () => async (dispatch) => {
 
 export const postJob = (values) => async (dispatch) => {
     values.postedBy = JSON.parse(localStorage.getItem("user"))._id;
-
     dispatch({ type: "LOADING", payload: true });
     try {
         const response = await axios.post("/api/jobs/postjob", values);
-
         dispatch({ type: "LOADING", payload: false });
         message.success("Job Posted Successfully");
         setTimeout(() => {
@@ -48,11 +46,9 @@ export const editJob = (values) => async (dispatch) => {
 };
 
 export const applyJob = (job) => async (dispatch) => {
-
     const user = JSON.parse(localStorage.getItem('user'))
     dispatch({ type: "LOADING", payload: true });
     try {
-        
         const response = await axios.post("/api/jobs/applyjob", {job, user});
         dispatch({ type: "LOADING", payload: false });
         message.success("Job Applied Successfully");

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
 import { Table } from "antd";
-//import Modal from 'antd/lib/modal/Modal'
 import { Button, Modal } from 'antd';
 import moment from "moment";
 import { EditOutlined, OrderedListOutlined } from "@ant-design/icons";
@@ -47,9 +46,8 @@ function PostedJobs() {
                         />
                         <OrderedListOutlined
                             style={{ fontSize: 20 }}
-                            onClick={() => 
-                                
-                                showModal(job)
+                            onClick={() =>
+                                showModal(data)
                             }
                         />
                     </div>
@@ -60,8 +58,8 @@ function PostedJobs() {
 
     const dataSource = [];
 
-    for (var job of userPostedJobs) {
-        var obj = {
+    for (const job of userPostedJobs) {
+        const obj = {
             title: job.title,
             company: job.company,
             postedOn: moment(job.createdAt).format("MMM DD yyyy"),
@@ -73,7 +71,7 @@ function PostedJobs() {
 
     const showModal = (job) => {
         setIsModalOpen(true);
-        setSelectedJob(job);
+        setSelectedJob(job.completeJobData);
     };
     const handleOk = () => {
         setIsModalOpen(false);
@@ -82,40 +80,40 @@ function PostedJobs() {
         setIsModalOpen(false);
     };
 
-function CandidatesList(){
-    const candidatesColumns =[
-        {
-            title: "Candidate ID",
-            dataIndex: "candidateId",
-            render: (text, data)=>{
-                return <Link to={`/users/${data.candidateId}`}>{data.candidateId}</Link>
+    function CandidatesList() {
+        const candidatesColumns = [
+            {
+                title: "Candidate ID",
+                dataIndex: "candidateId",
+                render: (text, data) => {
+                    return <Link to={`/users/${data.candidateId}`}>{data.candidateId}</Link>
+                }
+            },
+            {
+                title: "Full Name",
+                dataIndex: "fullName"
+            },
+            {
+                title: "Applied Date",
+                dataIndex: "appliedDate"
+            },
+        ];
+
+        var candidatesDatasource = []
+        for (var candidate of selectedJob.appliedCandidates) {
+
+            var user = allusers.find(user => user._id == candidate.userid)
+            var obj = {
+
+                candidateId: user._id,
+                fullName: user.firstName + " " + user.lastName,
+                appliedDate: candidate.appliedDate
             }
-        },
-        {
-            title: "Full Name",
-            dataIndex: "fullName"
-        },
-        {
-            title: "Applied Date",
-            dataIndex: "appliedDate"
-        },
-    ];
-
-    var candidatesDatasource = []
-    for(var candidate of selectedJob.appliedCandidates){
-
-        var user = allusers.find(user => user._id == candidate.userid)
-        var obj ={
-
-            candidateId: user._id,
-            fullName: user.firstName + " " + user.lastName,
-            appliedDate: candidate.appliedDate
+            candidatesDatasource.push(obj);
         }
-        candidatesDatasource.push(obj);
-    }
 
-    return <Table columns={candidatesColumns} dataSource={candidatesDatasource}/>
-}
+        return <Table columns={candidatesColumns} dataSource={candidatesDatasource} />
+    }
 
     return (
         <div>
@@ -132,7 +130,7 @@ function CandidatesList(){
                     onCancel={handleCancel}
                     width={800}
                 >
-                    <CandidatesList/>
+                    <CandidatesList />
                 </Modal>
             </DefaultLayout>
         </div>

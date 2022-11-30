@@ -34,7 +34,8 @@ function Login() {
                             <Input />
                         </Form.Item>
                         <Button htmlType='submit'>Login</Button>
-                        <p className='mt-3'>Not registered? <Link to='/register'>Click here</Link> to register.</p>
+                        <p className='mt-3'>Not registered? 
+                        <Link to='/register'>Click here</Link> to register.</p>
                     </Form>
 
                     

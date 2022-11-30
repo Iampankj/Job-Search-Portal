@@ -1,5 +1,4 @@
 import Search from 'antd/lib/input/Search'
-//import Modal from 'antd/lib/modal/Modal'
 import { Modal, Form, Select, Button } from 'antd';
 import React, { useState } from 'react'
 import {
@@ -34,8 +33,9 @@ function Filter() {
         <div className='flex'>
 
             <Search onSearch={(value)=>{dispatch(searchJobs(value))}}/> 
-            <FilterOutlined onClick={showModal}/>
-            <Modal title="Basic Modal" footer={false} visible={isModalOpen} onOk={handleOk} onCancel={handleCancel} closable={false}>
+            {/* <FilterOutlined onClick={showModal}/> */}
+            <Modal title="Basic Modal" footer={false} visible={isModalOpen} 
+                    onOk={handleOk} onCancel={handleCancel} closable={false}>
                 <Form layout='vertical' onFinish={sort}>
                     <Form.Item name='experience' label= "Experience">
                         <Select>

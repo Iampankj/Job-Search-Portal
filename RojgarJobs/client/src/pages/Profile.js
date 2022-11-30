@@ -6,8 +6,6 @@ import { useDispatch } from 'react-redux'
 import { updateUser } from '../redux/actions/userActions'
 
 
-
-
 function Profile() {
     const [personalInfo, setPersonalInfo] = useState()
     const [activeTab, setActiveTab] = useState("1")
@@ -26,7 +24,6 @@ function Profile() {
     }
 
     const user = JSON.parse(localStorage.getItem('user'))
-
 
     return (
         <div>
@@ -56,7 +53,7 @@ function Profile() {
                                     </Form.Item>
                                 </Col>
                                 <Col lg={8} sm={24}>
-                                    <Form.Item label='Portfolio' required rules={[{ required: true }]} name='portfolio'>
+                                    <Form.Item label='Portfolio'  name='portfolio'>
                                         <Input />
                                     </Form.Item>
                                 </Col>
@@ -72,22 +69,19 @@ function Profile() {
                                 </Col>
                             </Row>
                             <Button htmlType='submit'>Next</Button>
-
                         </Form>
-
-
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Skills and Education" key="2">
                         <Form initialValues={user} layout="vertical" onFinish={onFinalFinish}>
                             <Row>
-
                                 <Col lg={24} sm={24}>
                                     <Form.List name='education'>
                                         {(education, { add, remove }) => (
                                             <div>
                                                 {education.map((field, index) => (
-                                                    <div className='flex'>
-                                                        <Form.Item required {...field} label="Education" style={{ width: '80%' }} rules={[{ required: true }]}>
+                                                    <div className='flex' key={index}>
+                                                        <Form.Item required {...field} label="Education" 
+                                                        style={{ width: '80%' }} rules={[{ required: true }]}>
                                                             <TextArea rows={4} />
                                                         </Form.Item>
                                                         <Button onClick={() => { add() }}>Add more</Button>
@@ -98,13 +92,12 @@ function Profile() {
                                         )}
                                     </Form.List>
                                 </Col>
-
                                 <Col lg={24} sm={24}>
                                     <Form.List name='skills'>
                                         {(skills, { add, remove }) => (
                                             <div>
                                                 {skills.map((field, index) => (
-                                                    <div className='flex'>
+                                                    <div className='flex' key={index}>
                                                         <Form.Item required {...field} label="Skills" style={{ width: '80%' }} rules={[{ required: true }]}>
                                                             <TextArea rows={4} />
                                                         </Form.Item>
@@ -116,13 +109,12 @@ function Profile() {
                                         )}
                                     </Form.List>
                                 </Col>
-
                                 <Col lg={24} sm={24}>
                                     <Form.List name='projects'>
                                         {(projects, { add, remove }) => (
                                             <div>
                                                 {projects.map((field, index) => (
-                                                    <div className='flex'>
+                                                    <div className='flex' key={index}>
                                                         <Form.Item required {...field} label="Project" style={{ width: '80%' }} rules={[{ required: true }]}>
                                                             <TextArea rows={4} />
                                                         </Form.Item>
@@ -134,32 +126,28 @@ function Profile() {
                                         )}
                                     </Form.List>
                                 </Col>
-
                                 <Col lg={24} sm={24}>
                                     <Form.List name='experience'>
                                         {(experience, { add, remove }) => (
                                             <div>
                                                 {experience.map((field, index) => (
-                                                    <div className='flex'>
+                                                    <div className='flex' key={index}>
                                                         <Form.Item required {...field} label="Experience" style={{ width: '80%' }} rules={[{ required: true }]}>
                                                             <TextArea rows={4} />
                                                         </Form.Item>
                                                         <Button onClick={() => { add() }}>Add more</Button>
                                                         {index !== 0 && (<Button onClick={() => { remove(index) }}>Delete</Button>)}
                                                     </div>
-
                                                 ))}
                                             </div>
                                         )}
                                     </Form.List>
                                 </Col>
-
                             </Row>
                             <Button onClick={() => { setActiveTab("1") }}>Previous</Button>
                             <Button htmlType='submit'>Update</Button>
                         </Form>
                     </Tabs.TabPane>
-
                 </Tabs>
             </DefaultLayout>
         </div>

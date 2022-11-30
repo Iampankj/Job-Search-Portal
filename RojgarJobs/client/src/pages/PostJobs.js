@@ -3,8 +3,6 @@ import DefaultLayout from "../components/DefaultLayout"
 import { Row, Col, Form, Tabs, Input, Button, Select } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import { useDispatch } from 'react-redux'
-
-import { updateUser } from '../redux/actions/userActions'
 import { postJob } from '../redux/actions/jobActions'
 const{Option} = Select;
 
@@ -27,7 +25,6 @@ function PostJobs() {
         dispatch(postJob(finalObj))
         
     }
-
 
     return (
         <div>
@@ -113,14 +110,10 @@ function PostJobs() {
                                     </Form.Item>
                                 </Col>
                             </Row>
-                            {/* <Row>
-                            
-                            </Row> */}
                             <Button onClick={()=>{setActiveTab('0')}}>Previous</Button>
                             <Button htmlType='submit'>Post Job</Button>
                         </Form>
                     </Tabs.TabPane>
-
                 </Tabs>
             </DefaultLayout>
         </div>
